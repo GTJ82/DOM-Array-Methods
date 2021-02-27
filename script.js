@@ -7,9 +7,9 @@ const calculateWealthBtn = document.getElementById('calculate-wealth')
 
 let data = [];
 
-// getRandomUser();
-// getRandomUser();
-// getRandomUser();
+getRandomUser();
+getRandomUser();
+getRandomUser();
 
 async function getRandomUser() {
     const res = await fetch('https://randomuser.me/api');
@@ -26,6 +26,18 @@ async function getRandomUser() {
 
 function addData(obj) {
     data.push(obj)
+
+    updateDOM();
 };
 
-console.log(data);
+function updateDOM(providedData = data) {
+    // CLear the main div
+    main.innerHTML = '<h2><strong>Person</strong>Wealth</h2>';
+
+    providedData.forEach(item => {
+        const element = document.createElement('div');
+        element.classList.add('person');
+        element.innerHTML = `<strong>${item.name}</strong>${item.money}`;
+        main.appendChild(element);
+    })
+}
